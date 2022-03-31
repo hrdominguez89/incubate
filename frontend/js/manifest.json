@@ -1,0 +1,36 @@
+{
+  "name": "IncuBAte",
+  "short_name": "IncuBAte",
+  "description": "IncuBAte",
+  "scope": "http://localhost",
+  "start_url": "http://localhost",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#fdd306",
+  "background_color": "#fdd306",
+  "icons": [
+    {
+      "src": "http://localhost/uploads/icons/icon-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    }, {
+      "src": "http://localhost/uploads/icons/apple-touch-icon-152x152.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    }, {
+      "src": "http://localhost/uploads/icons/ms-touch-icon-144x144-precomposed.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "http://localhost/uploads/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "http://localhost/uploads/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

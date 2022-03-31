@@ -1,0 +1,31 @@
+
+---------------ASI----------------------
+
+
+Que se pueda acceder mediante una URL y no una IP (DNS):
+
+El Entorno de desarrollo debe tener activa la salida a internet:
+
+
+Configuracion smtp para envio de correos electronicos desde DEV:
+
+-HOST
+-USERNAME
+-PASSWORD
+-PORT
+-ENCRYPTION
+
+Repositorio S3, 200GB enviar credenciales para la conexion:
+-KEY
+-SECRET
+-BUCKET
+-ENDPOINT
+
+Repositorio GIT con los permisos habilitados para subir los archivos a la rama
+
+
+
+Credenciales para miBA (confirmar si es Open ID)
+
+
+
