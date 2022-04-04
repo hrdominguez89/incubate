@@ -153,21 +153,21 @@ Agregado pipi
 
 */
 
-                $cuit = '27302760735';
-                //cuit original 20261444772
-                //hash original $2a$12$vtmsPNft9a1QCwGWv/BpVeI2msj.qWJCTvK9HzaJBr3AHSFmALwIW
+                // $cuit = '27302760735';
+                // //cuit original 20261444772
+                // //hash original $2a$12$vtmsPNft9a1QCwGWv/BpVeI2msj.qWJCTvK9HzaJBr3AHSFmALwIW
 
-                $password = 'Prueba123';
+                // $password = 'Prueba123';
 
-                $user = Users::where('cuit', $cuit)->first();
+                // $user = Users::where('cuit', $cuit)->first();
 
-                if (isset($user) == 0) {
-                    $request->session()->put('error_oid', '1');
-                    return view('errors.error_status');
-                }
-                if (Auth::guard('admin')->attempt(['cuit' => $cuit, 'password' => $password])) {
-                    return Redirect::to('dashboard');
-                }
+                // if (isset($user) == 0) {
+                //     $request->session()->put('error_oid', '1');
+                //     return view('errors.error_status');
+                // }
+                // if (Auth::guard('admin')->attempt(['cuit' => $cuit, 'password' => $password])) {
+                //     return Redirect::to('dashboard');
+                // }
 
 
 
