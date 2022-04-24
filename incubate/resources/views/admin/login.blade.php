@@ -5,7 +5,7 @@
 
 
 
-{!! Form::open(['id'=>'formlogin','onsubmit'=>'true','method'=>'post','url'=> action('LoginController@callback')]) !!}
+{!! Form::open(['id'=>'formlogin','onsubmit'=>'true','method'=>'post','action="verifylogin"']) !!}
 
 <div class="uk-margin-medium-top">
     <div class="row" style="margin-top:10px">
@@ -28,3 +28,5 @@
 
 </div>
 {!! Form::close() !!}
+
+@stop
