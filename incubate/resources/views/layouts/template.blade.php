@@ -52,7 +52,7 @@
                <div class="launcher-dropdown z-depth-2">
                 <a href="<?php echo url('/')?>" title="" class="launch-btn" target="_blank"><i class="ti-world purple-text"></i> <span>Ver sitio</span></a>
                   <a href="<?php echo url('my-account')?>" title="" class="launch-btn"><i class="ti-user green-text"></i> <span>Mi cuenta</span></a>
-                  <a onclick="logout()" title="" class="launch-btn"><i class="ti-lock orange-text"></i> <span>Cerrar sesión</span></a>
+                  <a href="<?php echo url('logout')?>" title="" class="launch-btn"><i class="ti-lock orange-text"></i> <span>Cerrar sesión</span></a>
                </div>
             </div>
             <!-- Launcher -->
