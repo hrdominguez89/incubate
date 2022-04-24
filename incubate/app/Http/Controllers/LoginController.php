@@ -58,9 +58,23 @@ class LoginController extends Controller {
      * @return type
      */
     public function store(Request $request) {
-
         try {
             if (Auth::guard('admin')->guest()) {
+
+                if($request->post()){
+                    $cuit = $request->post('user');
+                    $password = $request->post('password');
+
+                    $user = Users::where('cuit', $cuit)->first();
+
+                    if (isset($user) == 0) {
+                        $request->session()->put('error_oid', '1');
+                        return view('errors.error_status');
+                    }
+                    if (Auth::guard('admin')->attempt(['cuit' => $cuit, 'password' => $password])) {
+                        return Redirect::to('dashboard');
+                    }
+                }
 
                 if (!Session::has('error_oid')) {
 
@@ -96,7 +110,6 @@ class LoginController extends Controller {
      * @return type
      */
     public function login(Request $request) {
-
         try {
             if (Auth::guard('admin')->guest()) {
 
@@ -109,7 +122,7 @@ class LoginController extends Controller {
                         $url .= '&redirect_uri=' . env('APP_URL') . '/verifylogin';
                         $url .= '&response_type=code&state=1';
 
-                        return Redirect::to($url);
+                        // return Redirect::to($url);
                     } else {
 
                         Session::forget('error_oid');
@@ -153,21 +166,21 @@ Agregado pipi
 
 */
 
-                $cuit = '27302760735';
+                //$cuit = '27302760735';
                 //cuit original 20261444772
                 //hash original $2a$12$vtmsPNft9a1QCwGWv/BpVeI2msj.qWJCTvK9HzaJBr3AHSFmALwIW
 
-                $password = 'Prueba123';
+                //$password = 'Prueba123';
 
-                $user = Users::where('cuit', $cuit)->first();
+                //$user = Users::where('cuit', $cuit)->first();
 
-                if (isset($user) == 0) {
-                    $request->session()->put('error_oid', '1');
-                    return view('errors.error_status');
-                }
-                if (Auth::guard('admin')->attempt(['cuit' => $cuit, 'password' => $password])) {
-                    return Redirect::to('dashboard');
-                }
+                //if (isset($user) == 0) {
+                    //$request->session()->put('error_oid', '1');
+                    //return view('errors.error_status');
+                // }
+                // if (Auth::guard('admin')->attempt(['cuit' => $cuit, 'password' => $password])) {
+                //     return Redirect::to('dashboard');
+                // }
 
 
 
@@ -315,3 +328,4 @@ fin agregado pipi
     }
 
 }
+
