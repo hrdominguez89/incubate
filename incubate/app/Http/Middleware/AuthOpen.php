@@ -9,7 +9,6 @@ use Auth;
 class AuthOpen {
 
     public function handle($request, Closure $next) {
-var_dump('aca');die();
         if (isset($_GET['error'])) {
             if ($request->session()->has('error_oid')) {
                 $request->session()->forget('error_oid');
