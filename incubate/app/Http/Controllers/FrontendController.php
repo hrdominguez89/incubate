@@ -87,29 +87,29 @@ class FrontendController extends Controller {
         try {
 
 
-            if (!Session::has('miba')) {
+            // if (!Session::has('miba')) {
 
-                if (!Session::has('error_oic')) {
+            //     if (!Session::has('error_oic')) {
 
-                    $url = env('MIBA_AUTH');
-                    $url .= '?client_id=' . env('MIBA_CLIENT_ID');
-                    $url .= '&redirect_uri=' . env('APP_URL') . '/callback';
-                    $url .= '&response_type=code&scope=openid+profile+email+address+extra';
-                    return Redirect::to($url);
-                } else {
+            //         $url = env('MIBA_AUTH');
+            //         $url .= '?client_id=' . env('MIBA_CLIENT_ID');
+            //         $url .= '&redirect_uri=' . env('APP_URL') . '/callback';
+            //         $url .= '&response_type=code&scope=openid+profile+email+address+extra';
+            //         return Redirect::to($url);
+            //     } else {
 
-                    Session::forget('error_oic');
-                    Session::forget('miba');
-                    return view('errors.error_auth');
-                }
-            } else {
+            //         Session::forget('error_oic');
+            //         Session::forget('miba');
+            //         return view('errors.error_auth');
+            //     }
+            // } else {
 
                 $get_menu = Menu::find(6);
                 if (isset($get_menu) != 0) {
 
                     return Redirect::to($get_menu->url);
                 }
-            }
+            // }
         } catch (Exception $ex) {
             return false;
         }
@@ -122,14 +122,22 @@ class FrontendController extends Controller {
      */
     public function logout(Request $request) {
         try {
-            if (Session::has('miba')) {
-                Session::forget('miba');
-            }
-            if (Session::has('error_oic')) {
-                Session::forget('error_oic');
-            }
-            $url = env('MIBA_LOGOUT') . '' . env('APP_URL') + "/iniciar-sesion";
-            return Redirect::to($url);
+            // if (Session::has('miba')) {
+            //     Session::forget('miba');
+            // }
+            // if (Session::has('error_oic')) {
+            //     Session::forget('error_oic');
+            // }
+            // $url = env('MIBA_LOGOUT') . '' . env('APP_URL') + "/iniciar-sesion";
+            // return Redirect::to($url);
+
+            //agregado pipi
+            $get_menu = Menu::find(6);
+                if (isset($get_menu) != 0) {
+
+                    return Redirect::to($get_menu->url);
+                }
+            //Fin agregado pipi
         } catch (Exception $ex) {
             return false;
         }
@@ -790,10 +798,10 @@ class FrontendController extends Controller {
      */
     public function presentations() {
         try {
-            if (!Session::has('miba')) {
+            // if (!Session::has('miba')) {
 
-                return redirect('iniciar-sesion');
-            } else {
+                // return redirect('iniciar-sesion');
+            // } else {
                 $url = explode("/", $_SERVER["REQUEST_URI"]);
                 if (isset($url[1])) {
                     if ($url[1] != 'en' || $url[1] == 'es') {
@@ -837,7 +845,7 @@ class FrontendController extends Controller {
                 $phone = Session::get('phone');
 
                 return view('frontend.presentations', ['subtitle' => $subtitle, 'tab' => $menu, 'lang' => $lang, 'url_en' => $url_en, 'url_es' => $url_es, 'person' => $person, 'categories' => $categories, 'state' => $state, 'dedicated' => $dedicated, 'interest' => $interest, 'member' => $member, 'name' => $name, 'last_name' => $last_name, 'phone' => $phone, 'dni' => $dni]);
-            }
+            // }
         } catch (Exception $ex) {
             return false;
         }

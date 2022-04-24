@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 class LoginController extends Controller {
 
     public function __construct() {
-        $this->middleware('AuthOpen', ['only' => ['callback']]);
+        // $this->middleware('AuthOpen', ['only' => ['callback']]);
     }
 
     /**
@@ -116,7 +116,6 @@ class LoginController extends Controller {
                 if (!Session::has('error_oid')) {
 
                     if (!Session::has('login_oid')) {
-
                         $url = env('OID_AUTH');
                         $url .= '?client_id=' . env('OID_CLIENT_ID');
                         $url .= '&redirect_uri=' . env('APP_URL') . '/verifylogin';
@@ -150,79 +149,33 @@ class LoginController extends Controller {
      * @throws TokenStorageException
      */
     public function callback(Request $request) {
-
-
         if (!Auth::guard('admin')->guest()) {
             Auth::guard('admin')->logout();
         }
 
-        $code = $request->get('code');
-        $http = new Client();
+        // $code = $request->get('code');
+        // $http = new Client();
 
         try {
-
+            /*
+            agregado pipi
+            */
+            $cuit = $request->user;
+            $password = $request->password;
+            
+            $user = Users::where('cuit', $cuit)->first();
+            
+            if (isset($user) == 0) {
+                $request->session()->put('error_oid', '1');
+                return view('errors.error_status');
+            }
+            if (Auth::guard('admin')->attempt(['cuit' => $cuit, 'password' => $password])) {
+                    return Redirect::to('dashboard');
+                }
 /*
-Agregado pipi
-
-*/
-
-                //$cuit = '27302760735';
-                //cuit original 20261444772
-                //hash original $2a$12$vtmsPNft9a1QCwGWv/BpVeI2msj.qWJCTvK9HzaJBr3AHSFmALwIW
-
-                //$password = 'Prueba123';
-
-                //$user = Users::where('cuit', $cuit)->first();
-
-                //if (isset($user) == 0) {
-                    //$request->session()->put('error_oid', '1');
-                    //return view('errors.error_status');
-                // }
-                // if (Auth::guard('admin')->attempt(['cuit' => $cuit, 'password' => $password])) {
-                //     return Redirect::to('dashboard');
-                // }
-
-
-
-/*
-
 fin agregado pipi
 */
 
-            $response = $http->post(env('OID_TOKEN'), [
-                'form_params' => [
-                    'grant_type' => 'authorization_code',
-                    'client_id' => env('OID_CLIENT_ID'),
-                    'client_secret' => env('OID_CLIENT_SECRET'),
-                    'redirect_uri' => env('APP_URL') . '/verifylogin',
-                    'code' => $code,
-                ],
-            ]);
-
-
-            $response = json_decode($response->getBody());
-
-            if (isset($response->user_id)) {
-
-                $cuit = $response->user_id;
-                $password = $response->user_id;
-
-                $user = Users::where('cuit', $cuit)->first();
-
-                if (isset($user) == 0) {
-                    $request->session()->put('error_oid', '1');
-                    return view('errors.error_status');
-                }
-                if (Auth::guard('admin')->attempt(['cuit' => $cuit, 'password' => $password])) {
-                    return Redirect::to('dashboard');
-                }
-            } else {
-
-                $request->session()->put('error_oid', '1');
-                return view('errors.error_auth');
-            }
-
-            echo print_r($response);
         } catch (Exception $ex) {
             return false;
         }

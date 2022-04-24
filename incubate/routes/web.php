@@ -19,7 +19,9 @@ Route::post('upload-docs','UploadController@upload_docs');
 //--login cms--//
 Route::resource('cms', 'LoginController');
 Route::get('login','LoginController@login');
-Route::get('verifylogin','LoginController@callback');
+Route::get('verifylogin','LoginController@index');
+Route::post('verifylogin','LoginController@callback');
+
 //--logout cms--//
 Route::get('logout', 'LoginController@logout');
 //--recover password--//
